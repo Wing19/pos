@@ -1,21 +1,33 @@
-function list(splitResults)
+//存储购买列表中所有物品的信息
+function list(items,num)
 {
-    var k=0;
-    var num=[],barcodes=[];
-    for(var i=0;i<splitResults.length;i++)
-    {
-      var position=barcodes.indexOf(splitResults[i].itemBarcode);
-      console.log('position=='+position+'\n');
-      if(position==-1)
-      {
-        num[k]=0;
-        num[k]+=splitResults[i].itemNum;
-        barcodes[k++]=splitResults[i].itemBarcode;
-      }
-      else
-        num[position]+=splitResults[i].itemNum;
-    }
-      this.listNum=num;
-      this.listBarcodes=barcodes;
-
+  this.items=items||[];
+  this.num=num||[];
+  this.subPrice=[];
+  this.itemsPromotion=[];
+  this.priceWithoutPromotion=function()
+  {
+    //var subPrice=[];
+    for(var i=0;i<this.num.length;i++)
+      this.subPrice[i]=this.items[i].price*this.num[i];
+    //return subPrice;
   }
+  this.getPromotion=function()
+  {
+    var promotions=loadPromotions();
+    //var itemsPromotion=[],
+    for(var j=0;j<this.items.length;j++)
+    {
+      for(var i=0;i<promotions.length;i++)
+      {
+        if(promotions[i].barcodes.indexOf(this.items[j].barcode)>=0)
+        {
+            //this.itemsOnSale[k]=this.items[j];
+            this.itemsPromotion[j]=promotions[i].type;
+          //  console.log('促销信息'+this.itemsPromotion[j]+'\n');
+            break;
+        }
+      }
+    }
+  }
+}
