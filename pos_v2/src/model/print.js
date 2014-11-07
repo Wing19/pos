@@ -15,6 +15,7 @@ function print(finalList)
   this.PromotionTab='';
   this.totalTab='';
   this.receipt='';
+  this.length=finalList.length;
   this.standardizeTime=function(num)
   {
     return num<10?'0'+num:num;
@@ -30,11 +31,10 @@ function print(finalList)
     var seconds=this.standardizeTime(myDate.getSeconds());
     this.time=year+'年'+month+'月'
       +day+'日'+' '+hours+':'+minutes+':'+seconds;
-    //console.log(this.time);
   }
   this.getItems=function()
   {
-    for(var i=0;i<finalList.items.length;i++)
+    for(var i=0;i<this.length;i++)
     {
       this.itemsTab+=this.nameHeader+finalList.items[i].name+'，'+this.accountHeader
                     +finalList.num[i]+finalList.items[i].unit+'，'+
@@ -42,11 +42,10 @@ function print(finalList)
                     +this.subPriceHeader+finalList.subPrice[i].toFixed(2)+'(元)\n';
 
     }
-  //  console.log(this.itemsTab);
   }
   this.getPromotion=function()
   {
-    for(var i=0;i<finalList.items.length;i++)
+    for(var i=0;i<this.length;i++)
     {
       if(finalList.freeNum[i]!=0)
         this.PromotionTab+=this.nameHeader+finalList.items[i].name+'，'

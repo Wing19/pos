@@ -1,3 +1,4 @@
+//属性包括（名称，数量，单位，单价，促销后价格，总价，总节省，赠送数目）
 function listWithPromotion(list)
 {
   this.items=list.items;
@@ -8,9 +9,10 @@ function listWithPromotion(list)
   this.savings=[];
   this.totalPrice=0;
   this.totalSavings=0;
+  this.length=list.length;
   this.priceWithPromotion=function()
   {
-    for(var i=0;i<this.items.length;i++)
+    for(var i=0;i<this.length;i++)
     {
       this.savings[i]=0;
       this.freeNum[i]=0;
